@@ -1,0 +1,15 @@
+GET http://localhost:5000/api/
+
+###
+GET http://localhost:5000/api/admin/worker/
+
+###
+POST http://localhost:5000/api/admin/worker/
+
+Content-Type: application/json
+
+{
+  "username":"jide",
+  "password":"jydnigi",
+  "admin":true
+}
