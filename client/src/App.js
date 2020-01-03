@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Login from './pages/Login';
+import Clients from './pages/Clients';
+import Admin from './pages/Admin';
+import { Switch, Route } from 'react-router-dom';
+import ProtectedRoute from './auth/ProtectedRoute';
+import ProtextedAdminRoute from './auth/ProtextedAdminRoute';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container  '>
+      <Switch>
+        <Route exact path='/' component={Login} />
+        {/* <ProtextedAdminRoute> */}
+        <Route exact path='/admin' component={Admin} />
+        <Route exact path='/clients' component={Clients} />
+        {/* </ProtextedAdminRoute> */}
+      </Switch>
     </div>
   );
 }
