@@ -7,7 +7,7 @@ import AppContext from '../context/AppContext/AppContext';
 
 const Clients = () => {
   const { getUser, auth } = useContext(AuthContext);
-  const { getClients, clients } = useContext(AppContext);
+  const { getClients, clients, workers } = useContext(AppContext);
 
   useEffect(() => {
     // getClients();
@@ -20,7 +20,7 @@ const Clients = () => {
       <NavBar />
       <Search />
       <div className='row'>
-        <Collection />
+        <Collection data={workers} />
       </div>
     </div>
   );
