@@ -15,6 +15,17 @@ router.get('/user', auth(), async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
+    res.status(500).send('server error');
+  }
+});
+
+//get token private spi/token
+router.get('/token', auth(), async (req, res) => {
+  try {
+    res.status(200).send('authenticated');
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('server error');
   }
 });
 //login user /api/auth

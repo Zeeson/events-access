@@ -23,7 +23,9 @@ const ClientValid = user => {
     email: Joi.string()
       .email()
       .required(),
-    wordcount: Joi.number().max(5)
+    wordcount: Joi.number()
+      .min(1)
+      .max(5)
   });
   const { error, value } = UserSchema.validate(user);
   return {

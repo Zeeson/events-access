@@ -1,32 +1,24 @@
-import { useEffect, useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Route, Redirect } from 'react-router-dom';
+import AuthContext from '../context/authContext/authContext';
+import Spinner from '../components/Spinner';
+const ProtectedRoute = ({ component: Component, ...rest }) => {
+  const { auth } = useContext(AuthContext);
 
-const ProtectedRoute = props => {
-  const [allowed, setAllowed] = useState(false);
-  useEffect(() => {
-    (async () => {
-      try {
-        const auth = await localStorage.getItem('auth');
-
-        if (!auth) props.history.push('/');
-        const rawResponse = await fetch('/user', {
-          method: 'GET',
-          headers: {
-            auth: auth,
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          }
-        });
-        const content = await rawResponse.json();
-        console.log(content);
-        setAllowed(true);
-      } catch (error) {
-        console.log(error);
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        auth ? (
+          <Component {...props} />
+        ) : auth === null ? (
+          <Spinner />
+        ) : (
+          <Redirect to='/login' />
+        )
       }
-    })();
-    // eslint-disable-next-line
-  }, []);
-  return allowed && props.children;
+    />
+  );
 };
 
-export default withRouter(ProtectedRoute);
+export default ProtectedRoute;

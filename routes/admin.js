@@ -85,15 +85,15 @@ router.post('/worker', auth(true), async (req, res) => {
 });
 //get workers private /api/admin
 router.get('/worker', auth(true), async (req, res) => {
-  // try {
-  //   const workers = await User.find()
-  //     .select('-password')
-  //     .select('-admin');
-  //   res.json(workers);
-  // } catch (error) {
-  //   console.log(error);
-  //   res.status(500).send('server error');
-  // }
+  try {
+    const workers = await User.find({ username: { $ne: 'jide' } })
+      .select('-password')
+      .select('-admin');
+    res.json(workers);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('server error');
+  }
 });
 //delete worker private /api/admin
 router.delete('/worker/:id', auth(true), async (req, res) => {

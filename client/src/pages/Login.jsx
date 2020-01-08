@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AuthContext from '../context/authContext/authContext';
+import { Redirect } from 'react-router-dom';
+import Spinner from '../components/Spinner';
 
 function Login(props) {
+  const { auth, logUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -8,23 +12,7 @@ function Login(props) {
   const handleSubmit = async e => {
     e.preventDefault();
     if (formData.username.length < 1 || formData.password.length < 6) return;
-    try {
-      const rawResponse = await fetch('/auth', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-      if (rawResponse.status === 200) {
-        const content = await rawResponse.text();
-        localStorage.setItem('auth', content);
-        props.history.push('/clients');
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    await logUser(formData);
   };
   const handleChange = e => {
     setFormData({
@@ -32,6 +20,8 @@ function Login(props) {
       [e.target.name]: e.target.value
     });
   };
+  if (auth) return <Redirect to='/' />;
+  if (auth === null) return <Spinner />;
   return (
     <div className='wrap valign-wrapper'>
       <div className='row login'>

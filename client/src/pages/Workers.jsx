@@ -4,12 +4,17 @@ import Collection from '../components/Collection';
 import Add from '../components/Add';
 import NavBar from '../components/NavBar';
 import AuthContext from '../context/authContext/authContext';
+import AppContext from '../context/AppContext/AppContext';
+
 import { Redirect } from 'react-router-dom';
 
-const Admin = () => {
+const Workers = () => {
   const { getUser, auth, admin } = useContext(AuthContext);
+  const { getWorkers } = useContext(AppContext);
+
   useEffect(() => {
     if (auth) getUser();
+    // getWorkers();
     // eslint-disable-next-line
   }, []);
 
@@ -20,10 +25,10 @@ const Admin = () => {
         <Search />
         <div className='row'>
           <Collection admin={true} />
-          <Add worker={false} />
+          <Add worker={true} />
         </div>
       </div>
     );
   return <Redirect to='/' />;
 };
-export default Admin;
+export default Workers;

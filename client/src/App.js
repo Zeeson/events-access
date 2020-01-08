@@ -2,21 +2,26 @@ import React from 'react';
 import Login from './pages/Login';
 import Clients from './pages/Clients';
 import Admin from './pages/Admin';
+import Workers from './pages/Workers';
 import { Switch, Route } from 'react-router-dom';
 import ProtectedRoute from './auth/ProtectedRoute';
-import ProtextedAdminRoute from './auth/ProtextedAdminRoute';
+import AuthState from './context/authContext/authState';
+import AppState from './context/AppContext/AppState';
 
 function App() {
   return (
-    <div className='container  '>
-      <Switch>
-        <Route exact path='/' component={Login} />
-        {/* <ProtextedAdminRoute> */}
-        <Route exact path='/admin' component={Admin} />
-        <Route exact path='/clients' component={Clients} />
-        {/* </ProtextedAdminRoute> */}
-      </Switch>
-    </div>
+    <AuthState>
+      <AppState>
+        <div className='container  '>
+          <Switch>
+            <Route exact path='/login' component={Login} />
+            <ProtectedRoute exact path='/admin' component={Admin} />
+            <ProtectedRoute exact path='/workers' component={Workers} />
+            <ProtectedRoute exact path='/' component={Clients} />
+          </Switch>
+        </div>
+      </AppState>
+    </AuthState>
   );
 }
 
