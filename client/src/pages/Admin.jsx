@@ -13,7 +13,7 @@ const Admin = () => {
   const { clients, deleteClient } = useContext(AppContext);
 
   useEffect(() => {
-    if (auth) getUser();
+    // if (auth) getUser();
     // eslint-disable-next-line
   }, []);
   const handleDelete = id => {

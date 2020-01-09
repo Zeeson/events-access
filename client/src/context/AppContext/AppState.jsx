@@ -3,20 +3,16 @@ import AppContext from './AppContext';
 import AuthContext from '../authContext/authContext';
 
 import AppReducer from './AppReducer';
-const auth = localStorage.getItem('auth');
+const Auth = localStorage.getItem('auth');
 
 const AppState = props => {
-  const { admin } = useContext(AuthContext);
+  const { admin, auth } = useContext(AuthContext);
 
   useEffect(() => {
-    getClients();
     if (admin) getWorkers();
-    console.log(admin);
-  }, []);
-  useEffect(() => {
-    if (admin) getWorkers();
-    console.log(admin);
-  }, [admin]);
+    if (auth) getClients();
+  }, [admin, auth]);
+
   const initialState = { clients: [], workers: [] };
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
@@ -25,7 +21,7 @@ const AppState = props => {
       const rawResponse = await fetch('/client', {
         method: 'GET',
         headers: {
-          auth: auth,
+          auth: Auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         }
@@ -44,7 +40,7 @@ const AppState = props => {
       const rawResponse = await fetch('/admin/client', {
         method: 'POST',
         headers: {
-          auth: auth,
+          auth: Auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
@@ -52,7 +48,7 @@ const AppState = props => {
       });
       const res = await rawResponse.json();
       console.log(res);
-      // getClients();
+      getClients();
     } catch (error) {
       console.log(error);
       // dispatch({ type: 'OUT' });
@@ -64,7 +60,7 @@ const AppState = props => {
       const rawResponse = await fetch(`/admin/client/${id}`, {
         method: 'DELETE',
         headers: {
-          auth: auth,
+          auth: Auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         }
@@ -84,7 +80,7 @@ const AppState = props => {
       const rawResponse = await fetch('/admin/worker', {
         method: 'POST',
         headers: {
-          auth: auth,
+          auth: Auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
@@ -104,7 +100,7 @@ const AppState = props => {
       const rawResponse = await fetch('/admin/worker', {
         method: 'GET',
         headers: {
-          auth: auth,
+          auth: Auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         }
@@ -123,7 +119,7 @@ const AppState = props => {
       const rawResponse = await fetch(`/admin/worker/${id}`, {
         method: 'DELETE',
         headers: {
-          auth: auth,
+          auth: Auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         }

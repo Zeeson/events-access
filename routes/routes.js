@@ -51,7 +51,7 @@ router.post('/auth', async (req, res) => {
   }
 });
 //get clients private /api/clients
-router.get('/client', auth(true), async (req, res) => {
+router.get('/client', auth(), async (req, res) => {
   try {
     const client = await Client.find();
     res.json(client);

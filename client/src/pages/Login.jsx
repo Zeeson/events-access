@@ -1,10 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from '../context/authContext/authContext';
-import { Redirect } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 
 function Login(props) {
   const { auth, logUser } = useContext(AuthContext);
+  useEffect(() => {
+    if (auth) props.history.push('/');
+    // eslint-disable-next-line
+  }, [auth]);
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -20,7 +23,7 @@ function Login(props) {
       [e.target.name]: e.target.value
     });
   };
-  if (auth) return <Redirect to='/' />;
+  // if (auth) return <Redirect to='/' />;
   if (auth === null) return <Spinner />;
   return (
     <div className='wrap valign-wrapper'>

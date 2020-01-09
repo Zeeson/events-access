@@ -10,10 +10,10 @@ import { Redirect } from 'react-router-dom';
 
 const Workers = () => {
   const { getUser, auth, admin } = useContext(AuthContext);
-  const { getWorkers, workers, deleteWorker } = useContext(AppContext);
+  const { workers, deleteWorker } = useContext(AppContext);
 
   useEffect(() => {
-    if (auth) getUser();
+    // if (auth) getUser();
     // getWorkers();
     // eslint-disable-next-line
   }, []);

@@ -2,12 +2,10 @@ import React, { useContext, useEffect } from 'react';
 import Search from '../components/Search';
 import Collection from '../components/Collection';
 import NavBar from '../components/NavBar';
-import AuthContext from '../context/authContext/authContext';
 import AppContext from '../context/AppContext/AppContext';
 
 const Clients = () => {
-  const { getUser, auth } = useContext(AuthContext);
-  const { getClients, clients, workers } = useContext(AppContext);
+  const { clients } = useContext(AppContext);
 
   useEffect(() => {
     // getClients();
@@ -20,7 +18,7 @@ const Clients = () => {
       <NavBar />
       <Search />
       <div className='row'>
-        <Collection data={workers} />
+        <Collection data={clients} />
       </div>
     </div>
   );

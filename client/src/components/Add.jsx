@@ -24,12 +24,13 @@ const Add = props => {
           name,
           email
         });
+      } else {
+        addClient({
+          name,
+          email,
+          wordcount: count
+        });
       }
-      addClient({
-        name,
-        email,
-        wordcount: count
-      });
     } else {
       if (name.length < 1 || email.length < 5) return;
       addWorker({
@@ -37,6 +38,11 @@ const Add = props => {
         password: email
       });
     }
+    setInput({
+      ...input,
+      name: '',
+      email: ''
+    });
   };
   const handleCheck = e => {
     setCheck(!check);

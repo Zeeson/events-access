@@ -11,7 +11,8 @@ const AuthState = props => {
   };
   const [state, dispatch] = useReducer(AuthReducer, initialState);
   useEffect(() => {
-    getUser();
+    if (!state.auth) getUser();
+    // eslint-disable-next-line
   }, []);
 
   //logout
@@ -37,7 +38,7 @@ const AuthState = props => {
       const userData = await rawResponse.json();
       dispatch({ type: 'USER', payload: userData });
     } catch (error) {
-      console.log(error);
+      console.log(error.json());
       dispatch({ type: 'OUT' });
     }
   };
