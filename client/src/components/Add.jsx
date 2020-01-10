@@ -107,8 +107,8 @@ const Add = props => {
             </label>
           </p>
         )}
-        <div className='but center-align'>
-          <button className='waves-effect waves-light btn'>Add</button>
+        <div className='but center-align '>
+          <button className='waves-effect waves-light btn blue'>Add</button>
         </div>
       </form>
     </div>

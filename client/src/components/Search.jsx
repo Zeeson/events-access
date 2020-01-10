@@ -18,7 +18,11 @@ const Search = () => {
             type='text'
             className='validate'
           />
+
           <label htmlFor='search'>Search</label>
+        </div>
+        <div className='clos'>
+          <i className='material-icons clo'>close</i>
         </div>
       </form>
     </div>

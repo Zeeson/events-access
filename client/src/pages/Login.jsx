@@ -24,6 +24,7 @@ function Login(props) {
     e.preventDefault();
     if (formData.username.length < 1 || formData.password.length < 6) return;
     logUser(formData);
+    window.M.toast({ html: 'Logging in' });
   };
   const handleChange = e => {
     setFormData({
@@ -68,7 +69,7 @@ function Login(props) {
             <label htmlFor='password'>Password</label>
           </div>
           <div className='but center-align'>
-            <button className='waves-effect waves-light btn'>Login</button>
+            <button className='waves-effect waves-light btn blue'>Login</button>
           </div>
         </form>
       </div>

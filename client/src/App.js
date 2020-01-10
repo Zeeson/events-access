@@ -18,6 +18,11 @@ function App() {
             <ProtectedRoute exact path='/admin' component={Admin} />
             <ProtectedRoute exact path='/workers' component={Workers} />
             <ProtectedRoute exact path='/' component={Clients} />
+            <Route
+              exact
+              path='*'
+              component={() => 'oops.. you must have typed the wrong url'}
+            />
           </Switch>
         </div>
       </AppState>

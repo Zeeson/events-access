@@ -2,6 +2,7 @@ import React, { useReducer } from 'react';
 import AppContext from './AppContext';
 import AppReducer from './AppReducer';
 import { withRouter } from 'react-router-dom';
+import Toast from '../../Util/Toast';
 
 const AppState = props => {
   const initialState = {
@@ -12,7 +13,6 @@ const AppState = props => {
     filter: false
   };
   const [state, dispatch] = useReducer(AppReducer, initialState);
-
   const getClients = async () => {
     console.log('start get gliennts');
     dispatch({ type: 'LOADING', payload: true });
@@ -49,9 +49,10 @@ const AppState = props => {
       const res = await rawResponse.json();
       console.log(res);
       getClients();
+      Toast('Client Added');
     } catch (error) {
       console.log(error);
-      // dispatch({ type: 'OUT' });
+      Toast();
     }
   };
   //delete cliemt
@@ -68,10 +69,10 @@ const AppState = props => {
       const res = await rawResponse.text();
       console.log(res);
       getClients();
+      Toast('Client Deleted');
     } catch (error) {
       console.log(error);
-
-      // dispatch({ type: 'OUT' });
+      Toast();
     }
   };
   //add worker
@@ -89,9 +90,10 @@ const AppState = props => {
       const res = await rawResponse.json();
       console.log(res);
       getWorkers();
+      Toast("Worker Added")
     } catch (error) {
       console.log(error);
-      // dispatch({ type: 'OUT' });
+      Toast()
     }
   };
   //getworker
@@ -126,10 +128,10 @@ const AppState = props => {
       const res = await rawResponse.text();
       console.log(res);
       getWorkers();
+      Toast("Worker deleted")
     } catch (error) {
       console.log(error);
-
-      // dispatch({ type: 'OUT' });
+      Toast()
     }
   };
 
@@ -145,7 +147,11 @@ const AppState = props => {
       dispatch({ type: 'FILTERWORKERS', payload: workers });
     } else {
       const clients = state.clients.filter(client => {
-        return client.name.includes(payload);
+        return (
+          client.name.includes(payload) ||
+          client.email.includes(payload) ||
+          client.token.includes(payload)
+        );
       });
       dispatch({ type: 'FILTERWORKERS', payload: clients });
     }
@@ -163,7 +169,6 @@ const AppState = props => {
         loading: state.loading,
         filtered: state.filtered,
         filter: state.filter,
-
         getClients,
         addClient,
         deleteClient,

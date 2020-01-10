@@ -31,7 +31,7 @@ const Workers = () => {
         <div className='row'>
           <Collection
             admin={true}
-            data={!filter < 1 ? workers : filtered}
+            data={!filter ? workers : filtered}
             onDelete={handleDelete}
           />
           <Add worker={true} />

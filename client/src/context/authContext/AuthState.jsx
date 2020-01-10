@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect } from 'react';
 import AuthContext from './AuthContext';
 import AuthReducer from './AuthReducer';
+import Toast from '../../Util/Toast';
 
 const AuthState = props => {
   const initialState = {
@@ -35,17 +36,21 @@ const AuthState = props => {
       const token = await rawResponse.text();
       if (rawResponse.status < 400) {
         dispatch({ type: 'SETTOKEN', payload: token });
+        Toast('Logged in successfully');
       } else {
         dispatch({ type: 'OUT' });
         console.log(token);
+        Toast(token);
       }
     } catch (error) {
       console.log(error);
+      Toast('Oops, something went wrong');
     }
   };
 
   const logout = () => {
     dispatch({ type: 'OUT' });
+    Toast('Logged out');
   };
 
   const getUser = async () => {
@@ -71,8 +76,7 @@ const AuthState = props => {
     } catch (error) {
       console.log(error);
       dispatch({ type: 'SETLOADING', payload: false });
-      console.log('dispatched false');
-      // dispatch({ type: 'OUT' });
+      Toast();
     }
   };
 

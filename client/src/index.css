@@ -30,3 +30,11 @@ form {
 .but {
   margin-bottom: 20px;
 }
+.clo {
+  margin-top: 30px;
+  margin-left: -31px;
+}
+.clos {
+  /* cursor: pointer; */
+  /* z-index: -100; */
+}
