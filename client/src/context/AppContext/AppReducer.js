@@ -1,5 +1,10 @@
 export default (state, action) => {
   switch (action.type) {
+    case 'LOADING':
+      return {
+        ...state,
+        loading: action.payload
+      };
     case 'CLIENTS':
       return {
         ...state,
@@ -9,6 +14,12 @@ export default (state, action) => {
       return {
         ...state,
         workers: action.payload
+      };
+    case 'CLEARSTATE':
+      return {
+        ...state,
+        clients: [],
+        workers: []
       };
     default:
       return state;

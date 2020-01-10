@@ -1,13 +1,28 @@
 import React, { useState, useContext, useEffect } from 'react';
-import AuthContext from '../context/authContext/authContext';
+import AuthContext from '../context/authContext/AuthContext';
+import AppContext from '../context/AppContext/AppContext';
+
 import Spinner from '../components/Spinner';
 
 function Login(props) {
-  const { auth, logUser } = useContext(AuthContext);
+  const { auth, logUser, loading, getUser } = useContext(AuthContext);
+  const { clearState, getClients } = useContext(AppContext);
+
   useEffect(() => {
+    clearState();
+  }, []);
+  useEffect(() => {
+    console.log('login mount');
+  }, []);
+  useEffect(() => {
+    if (localStorage.auth) {
+      console.log(auth);
+      // getClients();
+    }
+
     if (auth) props.history.push('/');
     // eslint-disable-next-line
-  }, [auth]);
+  }, [auth, props.history]);
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -15,7 +30,7 @@ function Login(props) {
   const handleSubmit = async e => {
     e.preventDefault();
     if (formData.username.length < 1 || formData.password.length < 6) return;
-    await logUser(formData);
+    logUser(formData);
   };
   const handleChange = e => {
     setFormData({
@@ -24,7 +39,7 @@ function Login(props) {
     });
   };
   // if (auth) return <Redirect to='/' />;
-  if (auth === null) return <Spinner />;
+  if (loading) return <Spinner />;
   return (
     <div className='wrap valign-wrapper'>
       <div className='row login'>

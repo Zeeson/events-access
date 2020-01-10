@@ -3,13 +3,13 @@ import Search from '../components/Search';
 import Collection from '../components/Collection';
 import Add from '../components/Add';
 import NavBar from '../components/NavBar';
-import AuthContext from '../context/authContext/authContext';
+import AuthContext from '../context/authContext/AuthContext';
 import AppContext from '../context/AppContext/AppContext';
 
 import { Redirect } from 'react-router-dom';
 
 const Admin = () => {
-  const { getUser, auth, admin } = useContext(AuthContext);
+  const { admin } = useContext(AuthContext);
   const { clients, deleteClient } = useContext(AppContext);
 
   useEffect(() => {

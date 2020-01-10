@@ -1,34 +1,28 @@
-import React, { useReducer, useEffect, useContext } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import AppContext from './AppContext';
-import AuthContext from '../authContext/authContext';
-
 import AppReducer from './AppReducer';
-const Auth = localStorage.getItem('auth');
 
+const Auth = localStorage.auth;
 const AppState = props => {
-  const { admin, auth } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (admin) getWorkers();
-    if (auth) getClients();
-  }, [admin, auth]);
-
-  const initialState = { clients: [], workers: [] };
+  const initialState = { clients: [], workers: [], loading: null };
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   const getClients = async () => {
+    console.log('start get gliennts');
+    dispatch({ type: 'LOADING', payload: true });
+
     try {
       const rawResponse = await fetch('/client', {
         method: 'GET',
         headers: {
-          auth: Auth,
+          auth: localStorage.auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         }
       });
       const clients = await rawResponse.json();
-      console.log(clients);
       dispatch({ type: 'CLIENTS', payload: clients });
+      dispatch({ type: 'LOADING', payload: false });
     } catch (error) {
       console.log(error);
       // dispatch({ type: 'OUT' });
@@ -106,7 +100,6 @@ const AppState = props => {
         }
       });
       const workers = await rawResponse.json();
-      console.log(workers);
       dispatch({ type: 'WORKERS', payload: workers });
     } catch (error) {
       console.log(error);
@@ -133,17 +126,23 @@ const AppState = props => {
       // dispatch({ type: 'OUT' });
     }
   };
+
+  const clearState = () => {
+    dispatch({ type: 'CLEARSTATE' });
+  };
   return (
     <AppContext.Provider
       value={{
         clients: state.clients,
         workers: state.workers,
+        loading: state.loading,
         getClients,
         addClient,
         deleteClient,
         addWorker,
         getWorkers,
-        deleteWorker
+        deleteWorker,
+        clearState
       }}
     >
       {props.children}
