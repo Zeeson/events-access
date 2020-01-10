@@ -1,10 +1,16 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import AppContext from './AppContext';
 import AppReducer from './AppReducer';
+import { withRouter } from 'react-router-dom';
 
-const Auth = localStorage.auth;
 const AppState = props => {
-  const initialState = { clients: [], workers: [], loading: null };
+  const initialState = {
+    clients: [],
+    workers: [],
+    filtered: [],
+    loading: null,
+    filter: false
+  };
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   const getClients = async () => {
@@ -34,7 +40,7 @@ const AppState = props => {
       const rawResponse = await fetch('/admin/client', {
         method: 'POST',
         headers: {
-          auth: Auth,
+          auth: localStorage.auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
@@ -54,7 +60,7 @@ const AppState = props => {
       const rawResponse = await fetch(`/admin/client/${id}`, {
         method: 'DELETE',
         headers: {
-          auth: Auth,
+          auth: localStorage.auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         }
@@ -74,7 +80,7 @@ const AppState = props => {
       const rawResponse = await fetch('/admin/worker', {
         method: 'POST',
         headers: {
-          auth: Auth,
+          auth: localStorage.auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
@@ -94,7 +100,7 @@ const AppState = props => {
       const rawResponse = await fetch('/admin/worker', {
         method: 'GET',
         headers: {
-          auth: Auth,
+          auth: localStorage.auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         }
@@ -112,7 +118,7 @@ const AppState = props => {
       const rawResponse = await fetch(`/admin/worker/${id}`, {
         method: 'DELETE',
         headers: {
-          auth: Auth,
+          auth: localStorage.auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         }
@@ -130,19 +136,43 @@ const AppState = props => {
   const clearState = () => {
     dispatch({ type: 'CLEARSTATE' });
   };
+
+  const filterState = payload => {
+    if (props.location.pathname === '/workers') {
+      const workers = state.workers.filter(worker => {
+        return worker.username.includes(payload);
+      });
+      dispatch({ type: 'FILTERWORKERS', payload: workers });
+    } else {
+      const clients = state.clients.filter(client => {
+        return client.name.includes(payload);
+      });
+      dispatch({ type: 'FILTERWORKERS', payload: clients });
+    }
+  };
+  const isSearch = payload => {
+    payload.length < 1
+      ? dispatch({ type: 'FILTER', payload: false })
+      : dispatch({ type: 'FILTER', payload: true });
+  };
   return (
     <AppContext.Provider
       value={{
         clients: state.clients,
         workers: state.workers,
         loading: state.loading,
+        filtered: state.filtered,
+        filter: state.filter,
+
         getClients,
         addClient,
         deleteClient,
         addWorker,
         getWorkers,
         deleteWorker,
-        clearState
+        clearState,
+        filterState,
+        isSearch
       }}
     >
       {props.children}
@@ -150,4 +180,4 @@ const AppState = props => {
   );
 };
 
-export default AppState;
+export default withRouter(AppState);

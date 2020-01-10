@@ -12,11 +12,11 @@ function App() {
   return (
     <AuthState>
       <AppState>
-        <div className='container  '>
+        <div className='container'>
           <Switch>
             <Route exact path='/login' component={Login} />
-            {/* <ProtectedRoute exact path='/admin' component={Admin} /> */}
-            {/* <ProtectedRoute exact path='/workers' component={Workers} /> */}
+            <ProtectedRoute exact path='/admin' component={Admin} />
+            <ProtectedRoute exact path='/workers' component={Workers} />
             <ProtectedRoute exact path='/' component={Clients} />
           </Switch>
         </div>

@@ -5,23 +5,16 @@ import AppContext from '../context/AppContext/AppContext';
 import Spinner from '../components/Spinner';
 
 function Login(props) {
-  const { auth, logUser, loading, getUser } = useContext(AuthContext);
-  const { clearState, getClients } = useContext(AppContext);
+  const { auth, logUser, loading } = useContext(AuthContext);
+  const { clearState } = useContext(AppContext);
 
   useEffect(() => {
     clearState();
-  }, []);
-  useEffect(() => {
-    console.log('login mount');
-  }, []);
-  useEffect(() => {
-    if (localStorage.auth) {
-      console.log(auth);
-      // getClients();
-    }
-
-    if (auth) props.history.push('/');
     // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    if (auth) props.history.push('/');
   }, [auth, props.history]);
   const [formData, setFormData] = useState({
     username: '',
@@ -60,9 +53,7 @@ function Login(props) {
               className='validate'
               value={formData.username}
             />
-            <label className='active' htmlFor='username'>
-              Username
-            </label>
+            <label htmlFor='username'>Username</label>
           </div>
           <div className='input-field'>
             <i className='material-icons prefix'>lock</i>
@@ -74,9 +65,7 @@ function Login(props) {
               className='validate'
               value={formData.password}
             />
-            <label className='active' htmlFor='password'>
-              Password
-            </label>
+            <label htmlFor='password'>Password</label>
           </div>
           <div className='but center-align'>
             <button className='waves-effect waves-light btn'>Login</button>

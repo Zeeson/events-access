@@ -9,13 +9,16 @@ import AppContext from '../context/AppContext/AppContext';
 import { Redirect } from 'react-router-dom';
 
 const Admin = () => {
-  const { admin } = useContext(AuthContext);
-  const { clients, deleteClient } = useContext(AppContext);
+  const { admin, auth } = useContext(AuthContext);
+  const { clients, deleteClient, getClients, filtered, filter } = useContext(
+    AppContext
+  );
 
   useEffect(() => {
-    // if (auth) getUser();
+    console.log('mount admin');
+    auth && getClients();
     // eslint-disable-next-line
-  }, []);
+  }, [auth]);
   const handleDelete = id => {
     deleteClient(id);
   };
@@ -26,7 +29,11 @@ const Admin = () => {
         <NavBar />
         <Search />
         <div className='row'>
-          <Collection admin={true} data={clients} onDelete={handleDelete} />
+          <Collection
+            admin={true}
+            data={!filter ? clients : filtered}
+            onDelete={handleDelete}
+          />
           <Add worker={false} />
         </div>
       </div>

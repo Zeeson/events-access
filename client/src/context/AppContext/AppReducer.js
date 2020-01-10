@@ -19,7 +19,18 @@ export default (state, action) => {
       return {
         ...state,
         clients: [],
-        workers: []
+        workers: [],
+        filtered: []
+      };
+    case 'FILTERWORKERS':
+      return {
+        ...state,
+        filtered: action.payload
+      };
+    case 'FILTER':
+      return {
+        ...state,
+        filter: action.payload
       };
     default:
       return state;

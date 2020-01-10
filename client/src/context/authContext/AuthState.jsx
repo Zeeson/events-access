@@ -3,8 +3,6 @@ import AuthContext from './AuthContext';
 import AuthReducer from './AuthReducer';
 
 const AuthState = props => {
-  const Auth = localStorage.getItem('auth');
-
   const initialState = {
     user: null,
     auth: false,
@@ -17,9 +15,11 @@ const AuthState = props => {
     console.log('ran');
     getUser();
     console.log('finished');
+    // eslint-disable-next-line
   }, []);
   useEffect(() => {
     if (state.auth) getUser();
+    // eslint-disable-next-line
   }, [state.auth]);
 
   const logUser = async formData => {
@@ -56,7 +56,7 @@ const AuthState = props => {
       const rawResponse = await fetch('/user', {
         method: 'GET',
         headers: {
-          auth: Auth,
+          auth: localStorage.auth,
           Accept: 'application/json',
           'Content-Type': 'application/json'
         }
