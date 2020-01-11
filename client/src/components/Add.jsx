@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import AppContext from '../context/AppContext/AppContext';
+import Toast from '../Util/Toast';
 
 const Add = props => {
   const [input, setInput] = useState({ name: '', email: '', count: 2 });
@@ -32,11 +33,21 @@ const Add = props => {
         });
       }
     } else {
-      if (name.length < 1 || email.length < 5) return;
-      addWorker({
-        username: name,
-        password: email
-      });
+      if (name.length < 1 || email.length < 6) {
+        if (name.length < 1 || email.length < 1) {
+          Toast('Please enter username or password');
+          return;
+        } else if (email.length < 6) {
+          Toast('password length must be greater than 5');
+          return;
+        }
+      } else {
+        console.log(input);
+        addWorker({
+          username: name,
+          password: email
+        });
+      }
     }
     setInput({
       ...input,
@@ -66,7 +77,7 @@ const Add = props => {
             type='text'
             className='validate'
           />
-          <label className='active' htmlFor='name'>
+          <label className='' htmlFor='name'>
             {props.worker ? 'Username' : 'Name'}
           </label>
         </div>
@@ -78,7 +89,7 @@ const Add = props => {
             type={props.worker ? 'password' : 'text'}
             className='validate'
           />
-          <label className='active' htmlFor='email'>
+          <label className='' htmlFor='email'>
             {props.worker ? 'password' : 'email'}
           </label>
         </div>

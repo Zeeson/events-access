@@ -7,12 +7,18 @@ import AuthContext from '../context/authContext/AuthContext';
 import AppContext from '../context/AppContext/AppContext';
 
 import { Redirect } from 'react-router-dom';
+import Spinner from '../components/Spinner';
 
 const Workers = () => {
   const { admin, auth } = useContext(AuthContext);
-  const { workers, deleteWorker, getWorkers, filtered, filter } = useContext(
-    AppContext
-  );
+  const {
+    workers,
+    deleteWorker,
+    getWorkers,
+    filtered,
+    filter,
+    loading
+  } = useContext(AppContext);
   useEffect(() => {
     console.log('mount workers');
     auth && admin && getWorkers();
@@ -34,6 +40,7 @@ const Workers = () => {
             data={!filter ? workers : filtered}
             onDelete={handleDelete}
           />
+
           <Add worker={true} />
         </div>
       </div>

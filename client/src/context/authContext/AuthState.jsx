@@ -72,11 +72,12 @@ const AuthState = props => {
         // dispatch({ type: 'SETLOADING', payload: false });
       } else {
         console.log('cant get clients', userData);
+        Toast();
       }
     } catch (error) {
       console.log(error);
       dispatch({ type: 'SETLOADING', payload: false });
-      Toast();
+      // Toast();
     }
   };
 

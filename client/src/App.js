@@ -7,6 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import ProtectedRoute from './auth/ProtectedRoute';
 import AuthState from './context/authContext/AuthState';
 import AppState from './context/AppContext/AppState';
+import Error from './pages/Error';
 
 function App() {
   return (
@@ -18,11 +19,7 @@ function App() {
             <ProtectedRoute exact path='/admin' component={Admin} />
             <ProtectedRoute exact path='/workers' component={Workers} />
             <ProtectedRoute exact path='/' component={Clients} />
-            <Route
-              exact
-              path='*'
-              component={() => 'oops.. you must have typed the wrong url'}
-            />
+            <Route exact path='*' component={Error} />
           </Switch>
         </div>
       </AppState>

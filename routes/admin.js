@@ -58,7 +58,7 @@ router.delete('/client/:id', auth(true), async (req, res) => {
 router.post('/worker', auth(true), async (req, res) => {
   const { error, value } = userValid(req.body);
   if (error) {
-    return res.send(error.message);
+    return res.status(401).send(error.message);
   }
   const { username, password, admin } = req.body;
   const user = User({
@@ -86,7 +86,7 @@ router.post('/worker', auth(true), async (req, res) => {
 //get workers private /api/admin
 router.get('/worker', auth(true), async (req, res) => {
   try {
-    const workers = await User.find({ username: { $ne: 'jide' } })
+    const workers = await User.find({ username: { $nin: ['jide', 'test'] } })
       .select('-password')
       .select('-admin');
     res.json(workers);

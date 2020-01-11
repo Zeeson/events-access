@@ -3,6 +3,7 @@ import AuthContext from '../context/authContext/AuthContext';
 import AppContext from '../context/AppContext/AppContext';
 
 import Spinner from '../components/Spinner';
+import Toast from '../Util/Toast';
 
 function Login(props) {
   const { auth, logUser, loading } = useContext(AuthContext);
@@ -22,9 +23,18 @@ function Login(props) {
   });
   const handleSubmit = async e => {
     e.preventDefault();
-    if (formData.username.length < 1 || formData.password.length < 6) return;
-    logUser(formData);
-    window.M.toast({ html: 'Logging in' });
+    if (formData.username.length < 1 || formData.password.length < 6) {
+      if (formData.username.length < 1 || formData.password.length < 1) {
+        Toast('Please enter username or password');
+        return;
+      } else if (formData.password.length < 6) {
+        Toast('password length must be greater than 5');
+        return;
+      }
+    } else {
+      logUser(formData);
+      window.M.toast({ html: 'Logging in' });
+    }
   };
   const handleChange = e => {
     setFormData({
@@ -32,7 +42,6 @@ function Login(props) {
       [e.target.name]: e.target.value
     });
   };
-  // if (auth) return <Redirect to='/' />;
   if (loading) return <Spinner />;
   return (
     <div className='wrap valign-wrapper'>
@@ -70,6 +79,10 @@ function Login(props) {
           </div>
           <div className='but center-align'>
             <button className='waves-effect waves-light btn blue'>Login</button>
+            <p>
+              Test username: <span style={{ color: 'blue' }}>test</span> test
+              password: <span style={{ color: 'blue' }}>test</span>
+            </p>
           </div>
         </form>
       </div>

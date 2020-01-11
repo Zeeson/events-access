@@ -14,9 +14,7 @@ const AppState = props => {
   };
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const getClients = async () => {
-    console.log('start get gliennts');
     dispatch({ type: 'LOADING', payload: true });
-
     try {
       const rawResponse = await fetch('/client', {
         method: 'GET',
@@ -31,7 +29,7 @@ const AppState = props => {
       dispatch({ type: 'LOADING', payload: false });
     } catch (error) {
       console.log(error);
-      // dispatch({ type: 'OUT' });
+      dispatch({ type: 'LOADING', payload: false });
     }
   };
   //add client
@@ -77,6 +75,7 @@ const AppState = props => {
   };
   //add worker
   const addWorker = async data => {
+    console.log('adding worker');
     try {
       const rawResponse = await fetch('/admin/worker', {
         method: 'POST',
@@ -87,17 +86,25 @@ const AppState = props => {
         },
         body: JSON.stringify(data)
       });
-      const res = await rawResponse.json();
-      console.log(res);
-      getWorkers();
-      Toast("Worker Added")
+      if (rawResponse.status < 400) {
+        const res = await rawResponse.json();
+        console.log(res);
+        getWorkers();
+        Toast('Worker Added');
+      } else {
+        const res = await rawResponse.text();
+        console.log(res);
+        Toast(res);
+      }
     } catch (error) {
       console.log(error);
-      Toast()
+      Toast(error.text());
     }
   };
   //getworker
   const getWorkers = async () => {
+    dispatch({ type: 'LOADING', payload: true });
+
     try {
       const rawResponse = await fetch('/admin/worker', {
         method: 'GET',
@@ -109,9 +116,10 @@ const AppState = props => {
       });
       const workers = await rawResponse.json();
       dispatch({ type: 'WORKERS', payload: workers });
+      dispatch({ type: 'LOADING', payload: false });
     } catch (error) {
       console.log(error);
-      // dispatch({ type: 'OUT' });
+      dispatch({ type: 'LOADING', payload: false });
     }
   };
   //delete  worker
@@ -128,10 +136,10 @@ const AppState = props => {
       const res = await rawResponse.text();
       console.log(res);
       getWorkers();
-      Toast("Worker deleted")
+      Toast('Worker deleted');
     } catch (error) {
       console.log(error);
-      Toast()
+      Toast();
     }
   };
 

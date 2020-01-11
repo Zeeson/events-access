@@ -17,12 +17,17 @@ const Search = () => {
             id='search'
             type='text'
             className='validate'
+            // placeholder='Search'
           />
-
           <label htmlFor='search'>Search</label>
-        </div>
-        <div className='clos'>
-          <i className='material-icons clo'>close</i>
+          {/* <span className='clos'>
+            <i
+              onClick={e => (e.target.parentElement.previousSibling.value = '')}
+              className='material-icons clo'
+            >
+              close
+            </i>
+          </span> */}
         </div>
       </form>
     </div>
