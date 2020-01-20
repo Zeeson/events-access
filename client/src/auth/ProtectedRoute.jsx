@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import AuthContext from '../context/Context/AuthContext';
+import AuthContext from '../context/AuthContext/AuthContext';
 import AppContext from '../context/AppContext/AppContext';
 import Spinner from '../components/Spinner';
 const ProtectedRoute = ({ component: Component, ...rest }) => {
