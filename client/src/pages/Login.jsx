@@ -1,14 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
-import AuthContext from '../context/authContext/AuthContext';
 import AppContext from '../context/AppContext/AppContext';
-
+import AuthContext from '../context/authContext/AuthContext';
 import Spinner from '../components/Spinner';
 import Toast from '../Util/Toast';
 
 function Login(props) {
   const { auth, logUser, loading } = useContext(AuthContext);
   const { clearState } = useContext(AppContext);
-
   useEffect(() => {
     clearState();
     // eslint-disable-next-line
