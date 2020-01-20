@@ -142,7 +142,7 @@ const AppState = props => {
           'Content-Type': 'application/json'
         }
       });
-      // const res = await rawResponse.text();
+      const res = await rawResponse.text();
       getWorkers();
       Toast('Worker deleted');
     } catch (error) {

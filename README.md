@@ -26,4 +26,4 @@ Ushers can:
 
 ### WebApp url
 
-[Events Access](http://www.google.fr/ 'Events Access webpage')
+[Events Access](https://events-access.herokuapp.com/ 'Events Access webpage')
