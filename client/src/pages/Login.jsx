@@ -81,7 +81,7 @@ function Login(props) {
             <button className='waves-effect waves-light btn blue'>Login</button>
             <p>
               Test username: <span style={{ color: 'blue' }}>test</span> test
-              password: <span style={{ color: 'blue' }}>test</span>
+              password: <span style={{ color: 'blue' }}>test12</span>
             </p>
           </div>
         </form>

@@ -59,7 +59,7 @@ const Add = props => {
     setCheck(!check);
   };
   return (
-    <div className='col l5'>
+    <div className='col l5 box-a'>
       <form
         action=''
         type='submit'

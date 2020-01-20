@@ -10,9 +10,14 @@ import { Redirect } from 'react-router-dom';
 
 const Admin = () => {
   const { admin, auth } = useContext(AuthContext);
-  const { clients, deleteClient, getClients, filtered, filter } = useContext(
-    AppContext
-  );
+  const {
+    clients,
+    deleteClient,
+    deleteClients,
+    getClients,
+    filtered,
+    filter
+  } = useContext(AppContext);
 
   useEffect(() => {
     console.log('mount admin');
@@ -22,14 +27,22 @@ const Admin = () => {
   const handleDelete = id => {
     deleteClient(id);
   };
+  const handleModal = e => {
+    if (e.target.innerText === 'YES') {
+      deleteClients();
+    } else {
+      return;
+    }
+  };
 
   if (admin)
     return (
       <div>
         <NavBar />
         <Search />
-        <div className='row'>
+        <div className='row flex-s'>
           <Collection
+            handleModal={handleModal}
             admin={true}
             data={!filter ? clients : filtered}
             onDelete={handleDelete}

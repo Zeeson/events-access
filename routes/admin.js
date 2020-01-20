@@ -17,7 +17,7 @@ router.post('/client', auth(true), async (req, res) => {
   const { name, email, wordcount } = req.body;
   const token = randomWords({
     exactly: 1,
-    wordsPerString: wordcount || 2,
+    wordsPerString: Number(wordcount) || 2,
     separator: '-'
   }).toString();
   const client = Client({

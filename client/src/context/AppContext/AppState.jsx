@@ -169,6 +169,44 @@ const AppState = props => {
       ? dispatch({ type: 'FILTER', payload: false })
       : dispatch({ type: 'FILTER', payload: true });
   };
+  const deleteClients = async () => {
+    try {
+      const rawResponse = await fetch(`/admin/client/`, {
+        method: 'DELETE',
+        headers: {
+          auth: localStorage.auth,
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      const res = await rawResponse.text();
+      console.log(res);
+      getClients();
+      Toast('All Clients Deleted');
+    } catch (error) {
+      console.log(error);
+      Toast();
+    }
+  };
+  const deleteWorkers = async () => {
+    try {
+      const rawResponse = await fetch(`/admin/worker/`, {
+        method: 'DELETE',
+        headers: {
+          auth: localStorage.auth,
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      const res = await rawResponse.text();
+      console.log(res);
+      getWorkers();
+      Toast('All Workers Deleted');
+    } catch (error) {
+      console.log(error);
+      Toast();
+    }
+  };
   return (
     <AppContext.Provider
       value={{
@@ -180,9 +218,11 @@ const AppState = props => {
         getClients,
         addClient,
         deleteClient,
+        deleteClients,
         addWorker,
         getWorkers,
         deleteWorker,
+        deleteWorkers,
         clearState,
         filterState,
         isSearch

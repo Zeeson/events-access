@@ -5,7 +5,6 @@ import Add from '../components/Add';
 import NavBar from '../components/NavBar';
 import AuthContext from '../context/authContext/AuthContext';
 import AppContext from '../context/AppContext/AppContext';
-
 import { Redirect } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 
@@ -14,6 +13,7 @@ const Workers = () => {
   const {
     workers,
     deleteWorker,
+    deleteWorkers,
     getWorkers,
     filtered,
     filter,
@@ -29,13 +29,22 @@ const Workers = () => {
     deleteWorker(id);
   };
 
+  const handleModal = e => {
+    if (e.target.innerText === 'YES') {
+      deleteWorkers();
+    } else {
+      return;
+    }
+  };
+
   if (admin)
     return (
       <div>
         <NavBar />
         <Search />
-        <div className='row'>
+        <div className='row flex-s'>
           <Collection
+            handleModal={handleModal}
             admin={true}
             data={!filter ? workers : filtered}
             onDelete={handleDelete}

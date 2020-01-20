@@ -38,7 +38,7 @@ form {
 }
 
 .brand-logo {
-  margin-left: 40px;
+  /* margin-left: 40px; */
 }
 
 .error {
@@ -55,4 +55,14 @@ form {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+  .flex-s {
+    display: flex;
+    flex-direction: column; /* Stack on top */
+  }
+  .box-a {
+    order: -1; /* Go down, bring Box B up */
+  }
 }

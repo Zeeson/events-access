@@ -1,21 +1,18 @@
 import React from 'react';
 import CollectionItem from './Collection-Item';
 import { withRouter } from 'react-router-dom';
+import Modal from './Modal';
 
 const Collection = props => {
   const { data, admin } = props;
-
+  const isWorker =
+    props.location.pathname === '/workers' ? 'Workers' : 'Clients';
   return (
     <ul className={`collection with-header ` + (admin ? 'col l7' : null)}>
       <li className='collection-header'>
-        <h4>
-          {props.location.pathname === '/workers' ? 'Workers' : 'Clients'}
-        </h4>
-        {props.location.pathname !== '/' && (
-          <button className='waves-effect waves-light btn blue'>
-            delete all
-            {props.location.pathname === '/workers' ? ' workers' : ' clients'}
-          </button>
+        <h4>{isWorker}</h4>
+        {data.length > 0 && props.location.pathname !== '/' && (
+          <Modal isWorker={isWorker} handleModal={props.handleModal} />
         )}
       </li>
       {data.length > 0 ? (
