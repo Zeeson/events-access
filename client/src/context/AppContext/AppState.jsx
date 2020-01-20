@@ -17,7 +17,7 @@ const AppState = props => {
   const getClients = async () => {
     dispatch({ type: 'LOADING', payload: true });
     try {
-      const rawResponse = await fetch('/client', {
+      const rawResponse = await fetch('/api/client', {
         method: 'GET',
         headers: {
           auth: localStorage.auth,
@@ -38,7 +38,7 @@ const AppState = props => {
     dispatch({ type: 'CLEAR_CURRENT', payload: false });
 
     try {
-      const rawResponse = await fetch('/admin/client', {
+      const rawResponse = await fetch('/api/admin/client', {
         method: 'POST',
         headers: {
           auth: localStorage.auth,
@@ -66,7 +66,7 @@ const AppState = props => {
   //delete cliemt
   const deleteClient = async id => {
     try {
-      const rawResponse = await fetch(`/admin/client/${id}`, {
+      const rawResponse = await fetch(`/api/admin/client/${id}`, {
         method: 'DELETE',
         headers: {
           auth: localStorage.auth,
@@ -86,7 +86,7 @@ const AppState = props => {
   const addWorker = async data => {
     dispatch({ type: 'CLEAR_CURRENT', payload: false });
     try {
-      const rawResponse = await fetch('/admin/worker', {
+      const rawResponse = await fetch('/api/admin/worker', {
         method: 'POST',
         headers: {
           auth: localStorage.auth,
@@ -115,7 +115,7 @@ const AppState = props => {
     dispatch({ type: 'LOADING', payload: true });
 
     try {
-      const rawResponse = await fetch('/admin/worker', {
+      const rawResponse = await fetch('/api/admin/worker', {
         method: 'GET',
         headers: {
           auth: localStorage.auth,
@@ -134,7 +134,7 @@ const AppState = props => {
   //delete  worker
   const deleteWorker = async id => {
     try {
-      const rawResponse = await fetch(`/admin/worker/${id}`, {
+      const rawResponse = await fetch(`/api/admin/worker/${id}`, {
         method: 'DELETE',
         headers: {
           auth: localStorage.auth,
@@ -179,7 +179,7 @@ const AppState = props => {
   };
   const deleteClients = async () => {
     try {
-      const rawResponse = await fetch(`/admin/client/`, {
+      const rawResponse = await fetch(`/api/admin/client/`, {
         method: 'DELETE',
         headers: {
           auth: localStorage.auth,
@@ -197,7 +197,7 @@ const AppState = props => {
   };
   const deleteWorkers = async () => {
     try {
-      const rawResponse = await fetch(`/admin/worker/`, {
+      const rawResponse = await fetch(`/api/admin/worker/`, {
         method: 'DELETE',
         headers: {
           auth: localStorage.auth,

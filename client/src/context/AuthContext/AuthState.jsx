@@ -23,7 +23,7 @@ const AuthState = props => {
 
   const logUser = async formData => {
     try {
-      const rawResponse = await fetch('/auth', {
+      const rawResponse = await fetch('/api/auth', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -55,7 +55,7 @@ const AuthState = props => {
     try {
       dispatch({ type: 'SETLOADING', payload: true });
 
-      const rawResponse = await fetch('/user', {
+      const rawResponse = await fetch('/api/user', {
         method: 'GET',
         headers: {
           auth: localStorage.auth,
