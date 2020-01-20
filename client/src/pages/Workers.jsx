@@ -40,7 +40,6 @@ const Workers = () => {
   if (admin)
     return (
       <div>
-        <NavBar />
         <Search />
         <div className='row flex-s'>
           <Collection

@@ -10,7 +10,8 @@ const AppState = props => {
     workers: [],
     filtered: [],
     loading: null,
-    filter: false
+    filter: false,
+    current: false
   };
   const [state, dispatch] = useReducer(AppReducer, initialState);
   const getClients = async () => {
@@ -34,6 +35,8 @@ const AppState = props => {
   };
   //add client
   const addClient = async data => {
+    dispatch({ type: 'CLEAR_CURRENT', payload: false });
+
     try {
       const rawResponse = await fetch('/admin/client', {
         method: 'POST',
@@ -45,10 +48,18 @@ const AppState = props => {
         body: JSON.stringify(data)
       });
       const res = await rawResponse.json();
-      console.log(res);
-      getClients();
-      Toast('Client Added');
+      if (rawResponse.status < 400) {
+        console.log(res);
+        dispatch({ type: 'CLEAR_CURRENT', payload: true });
+
+        getClients();
+        Toast('Client Added');
+      } else {
+        dispatch({ type: 'CLEAR_CURRENT', payload: false });
+        Toast(res);
+      }
     } catch (error) {
+      dispatch({ type: 'CLEAR_CURRENT', payload: false });
       console.log(error);
       Toast();
     }
@@ -75,6 +86,8 @@ const AppState = props => {
   };
   //add worker
   const addWorker = async data => {
+    dispatch({ type: 'CLEAR_CURRENT', payload: false });
+
     console.log('adding worker');
     try {
       const rawResponse = await fetch('/admin/worker', {
@@ -91,14 +104,17 @@ const AppState = props => {
         console.log(res);
         getWorkers();
         Toast('Worker Added');
+        dispatch({ type: 'CLEAR_CURRENT', payload: true });
       } else {
         const res = await rawResponse.text();
         console.log(res);
         Toast(res);
       }
     } catch (error) {
+      dispatch({ type: 'CLEAR_CURRENT', payload: false });
+
       console.log(error);
-      Toast(error.text());
+      Toast();
     }
   };
   //getworker
@@ -215,6 +231,7 @@ const AppState = props => {
         loading: state.loading,
         filtered: state.filtered,
         filter: state.filter,
+        clearCurrent: state.current,
         getClients,
         addClient,
         deleteClient,

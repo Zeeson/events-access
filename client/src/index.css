@@ -56,6 +56,13 @@ form {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+#slide-out a {
+  color: white;
+}
+
+#slide-out {
+  padding-top: 20px;
+}
 
 @media (max-width: 768px) {
   .flex-s {

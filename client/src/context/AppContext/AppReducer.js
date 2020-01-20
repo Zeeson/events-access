@@ -32,6 +32,11 @@ export default (state, action) => {
         ...state,
         filter: action.payload
       };
+    case 'CLEAR_CURRENT':
+      return {
+        ...state,
+        current: action.payload
+      };
     default:
       return state;
   }

@@ -9,7 +9,6 @@ const Clients = () => {
   const { clients, filtered, filter, loading } = useContext(AppContext);
   return (
     <div>
-      <NavBar />
       <Search />
       <div className='row'>
         {!loading ? (

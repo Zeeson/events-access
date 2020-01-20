@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AppContext from '../context/AppContext/AppContext';
 import Toast from '../Util/Toast';
 
@@ -6,7 +6,17 @@ const Add = props => {
   const [input, setInput] = useState({ name: '', email: '', count: 2 });
   const [check, setCheck] = useState(false);
 
-  const { addClient, addWorker } = useContext(AppContext);
+  const { addClient, addWorker, clearCurrent } = useContext(AppContext);
+
+  useEffect(() => {
+    if (clearCurrent) {
+      setInput({
+        ...input,
+        name: '',
+        email: ''
+      });
+    }
+  }, [clearCurrent]);
 
   const handleChange = e => {
     setInput({
@@ -49,11 +59,6 @@ const Add = props => {
         });
       }
     }
-    setInput({
-      ...input,
-      name: '',
-      email: ''
-    });
   };
   const handleCheck = e => {
     setCheck(!check);
@@ -76,6 +81,7 @@ const Add = props => {
             id='name'
             type='text'
             className='validate'
+            value={input.name}
           />
           <label className='' htmlFor='name'>
             {props.worker ? 'Username' : 'Name'}
@@ -88,6 +94,7 @@ const Add = props => {
             id='email'
             type={props.worker ? 'password' : 'text'}
             className='validate'
+            value={input.email}
           />
           <label className='' htmlFor='email'>
             {props.worker ? 'password' : 'email'}

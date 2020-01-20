@@ -38,7 +38,6 @@ const Admin = () => {
   if (admin)
     return (
       <div>
-        <NavBar />
         <Search />
         <div className='row flex-s'>
           <Collection

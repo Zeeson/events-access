@@ -12,7 +12,7 @@ const mail = require('../mailer');
 router.post('/client', auth(true), async (req, res) => {
   const { error, value } = clientValid(req.body);
   if (error) {
-    return res.send(error.message);
+    return res.status(400).json(error.message);
   }
   const { name, email, wordcount } = req.body;
   const token = randomWords({
@@ -58,7 +58,7 @@ router.delete('/client/:id', auth(true), async (req, res) => {
 router.post('/worker', auth(true), async (req, res) => {
   const { error, value } = userValid(req.body);
   if (error) {
-    return res.status(401).send(error.message);
+    return res.status(400).json(error.message);
   }
   const { username, password, admin } = req.body;
   const user = User({

@@ -14,7 +14,8 @@ const NavBar = props => {
   const handleClick = () => {
     logout();
   };
-  return (
+
+  return props.location.pathname === '/login' ? null : (
     <div>
       <nav>
         <div className='nav-wrapper blue'>
@@ -59,7 +60,7 @@ const NavBar = props => {
           </ul>
         </div>
       </nav>
-      <ul ref={elem} className='sidenav' id='slide-out'>
+      <ul ref={elem} className='sidenav blue' id='slide-out'>
         {admin && props.location.pathname === '/admin' && (
           <li>
             <Link className='sidenav-close' to='/workers'>
@@ -69,24 +70,34 @@ const NavBar = props => {
         )}
         {admin && props.location.pathname === '/workers' && (
           <li>
-            <Link className='sidenav-close' to='/admin'>Clients</Link>
+            <Link className='sidenav-close' to='/admin'>
+              Clients
+            </Link>
           </li>
         )}
         {admin && props.location.pathname !== '/' && (
           <li>
-            <Link className='sidenav-close' to='/'>Home</Link>
+            <Link className='sidenav-close' to='/'>
+              Home
+            </Link>
           </li>
         )}
         {admin && props.location.pathname === '/' && (
           <>
             <li>
-              <Link className='sidenav-close' to='/'>Home</Link>
+              <Link className='sidenav-close' to='/'>
+                Home
+              </Link>
             </li>
             <li>
-              <Link className='sidenav-close' to='/admin'>Clients</Link>
+              <Link className='sidenav-close' to='/admin'>
+                Clients
+              </Link>
             </li>
             <li>
-              <Link className='sidenav-close' to='/workers'>Workers</Link>
+              <Link className='sidenav-close' to='/workers'>
+                Workers
+              </Link>
             </li>
           </>
         )}
