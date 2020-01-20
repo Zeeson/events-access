@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import AuthContext from '../context/AuthContext/AppContext';
+import AuthContext from '../context/AuthContext/AuthContext';
 
 const NavBar = props => {
   const elem = useRef();
