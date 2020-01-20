@@ -10,7 +10,7 @@ const Collection = props => {
   return (
     <ul className={`collection with-header ` + (admin ? 'col l7' : null)}>
       <li className='collection-header'>
-        <h4>{isWorker}</h4>
+        <h4 className='coll-header'>{isWorker}</h4>
         {data.length > 0 && props.location.pathname !== '/' && (
           <Modal isWorker={isWorker} handleModal={props.handleModal} />
         )}
