@@ -51,7 +51,6 @@ const AuthState = props => {
   };
 
   const getUser = async () => {
-    console.log('getUser');
     try {
       dispatch({ type: 'SETLOADING', payload: true });
 

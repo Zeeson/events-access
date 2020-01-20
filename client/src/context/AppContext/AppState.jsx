@@ -50,9 +50,9 @@ const AppState = props => {
       const res = await rawResponse.json();
       if (rawResponse.status < 400) {
         dispatch({ type: 'CLEAR_CURRENT', payload: true });
-
         getClients();
         Toast('Client Added');
+        // dispatch({ type: 'CLEAR_CURRENT', payload: false });
       } else {
         dispatch({ type: 'CLEAR_CURRENT', payload: false });
         Toast(res);
@@ -74,7 +74,7 @@ const AppState = props => {
           'Content-Type': 'application/json'
         }
       });
-      const res = await rawResponse.text();
+      // const res = await rawResponse.text();
       getClients();
       Toast('Client Deleted');
     } catch (error) {
@@ -96,7 +96,7 @@ const AppState = props => {
         body: JSON.stringify(data)
       });
       if (rawResponse.status < 400) {
-        const res = await rawResponse.json();
+        // const res = await rawResponse.json();
         getWorkers();
         Toast('Worker Added');
         dispatch({ type: 'CLEAR_CURRENT', payload: true });
@@ -142,7 +142,7 @@ const AppState = props => {
           'Content-Type': 'application/json'
         }
       });
-      const res = await rawResponse.text();
+      // const res = await rawResponse.text();
       getWorkers();
       Toast('Worker deleted');
     } catch (error) {
@@ -187,7 +187,7 @@ const AppState = props => {
           'Content-Type': 'application/json'
         }
       });
-      const res = await rawResponse.text();
+      // const res = await rawResponse.text();
       getClients();
       Toast('All Clients Deleted');
     } catch (error) {
@@ -205,7 +205,7 @@ const AppState = props => {
           'Content-Type': 'application/json'
         }
       });
-      const res = await rawResponse.text();
+      // const res = await rawResponse.text();
       getWorkers();
       Toast('All Workers Deleted');
     } catch (error) {

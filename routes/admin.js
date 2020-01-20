@@ -27,7 +27,7 @@ router.post('/client', auth(true), async (req, res) => {
   });
   try {
     const exist = await Client.findOne({ email });
-    if (exist) return res.send('client exists!');
+    if (exist) return res.status(400).json('client exists!');
   } catch (error) {
     res.status(500).send('server error');
   }

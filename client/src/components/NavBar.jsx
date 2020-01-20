@@ -10,7 +10,7 @@ const NavBar = props => {
       edge: 'left',
       inDuration: 250
     });
-  }, []);
+  }, [props]);
   const handleClick = () => {
     logout();
   };

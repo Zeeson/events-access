@@ -1,6 +1,6 @@
 import React from 'react';
 import CollectionItem from './Collection-Item';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Modal from './Modal';
 
 const Collection = props => {
@@ -26,10 +26,16 @@ const Collection = props => {
             />
           );
         })
+      ) : props.location.pathname === '/' && admin === true ? (
+        <Link to='/admin'>
+          <button className='waves-effect waves-light btn blue '>
+            Add Client
+          </button>
+        </Link>
       ) : (
         <div>
-          You have not added a{' '}
-          {props.location.pathname === '/workers' ? 'worker' : 'client'}
+          {props.location.pathname === '/workers' ? 'Worker' : 'Clients'} have
+          not been added
         </div>
       )}
     </ul>

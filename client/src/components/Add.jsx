@@ -16,7 +16,8 @@ const Add = props => {
         email: ''
       });
     }
-  }, [input, clearCurrent]);
+    // eslint-disable-next-line
+  }, [clearCurrent]);
 
   const handleChange = e => {
     setInput({

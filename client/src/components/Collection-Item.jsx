@@ -7,7 +7,7 @@ const CollectionItem = props => {
   } = props;
   return (
     <li className='collection-item avatar'>
-      <i className='material-icons circle green'>person</i>
+      <i className='material-icons circle blue'>person</i>
       <div>
         {!username && name}
         <p>{!username && email}</p>
