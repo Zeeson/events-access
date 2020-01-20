@@ -1,12 +1,11 @@
 import React, { Fragment, useRef, useEffect } from 'react';
-import M from 'materialize-css';
 
 const Modal = props => {
   const { isWorker, handleModal } = props;
   const Modal = useRef();
   useEffect(() => {
     const options = {};
-    M.Modal.init(Modal.current, options);
+    window.M.Modal.init(Modal.current, options);
   }, []);
   return (
     <Fragment>
