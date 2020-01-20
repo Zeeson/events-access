@@ -34,7 +34,7 @@ router.post('/client', auth(true), async (req, res) => {
   try {
     const registered = await client.save();
     //send mail
-    // await mail(registered.email, registered.token);
+    await mail(registered.email, registered.token);
     res.status(201).json({
       name: registered.name,
       email: registered.email,
