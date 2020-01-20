@@ -16,7 +16,7 @@ const Add = props => {
         email: ''
       });
     }
-  }, [clearCurrent]);
+  }, [input, clearCurrent]);
 
   const handleChange = e => {
     setInput({
@@ -52,7 +52,6 @@ const Add = props => {
           return;
         }
       } else {
-        console.log(input);
         addWorker({
           username: name,
           password: email

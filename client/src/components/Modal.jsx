@@ -22,12 +22,14 @@ const Modal = props => {
         </div>
         <div className='modal-footer'>
           <a
+            href='#!'
             onClick={handleModal}
             className='modal-close waves-effect waves-green btn-flat'
           >
             Yes
           </a>
           <a
+            href='#!'
             onClick={handleModal}
             className='modal-close waves-effect waves-green btn-flat'
           >

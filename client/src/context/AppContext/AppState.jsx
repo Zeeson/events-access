@@ -49,7 +49,6 @@ const AppState = props => {
       });
       const res = await rawResponse.json();
       if (rawResponse.status < 400) {
-        console.log(res);
         dispatch({ type: 'CLEAR_CURRENT', payload: true });
 
         getClients();
@@ -76,7 +75,6 @@ const AppState = props => {
         }
       });
       const res = await rawResponse.text();
-      console.log(res);
       getClients();
       Toast('Client Deleted');
     } catch (error) {
@@ -87,8 +85,6 @@ const AppState = props => {
   //add worker
   const addWorker = async data => {
     dispatch({ type: 'CLEAR_CURRENT', payload: false });
-
-    console.log('adding worker');
     try {
       const rawResponse = await fetch('/admin/worker', {
         method: 'POST',
@@ -101,18 +97,15 @@ const AppState = props => {
       });
       if (rawResponse.status < 400) {
         const res = await rawResponse.json();
-        console.log(res);
         getWorkers();
         Toast('Worker Added');
         dispatch({ type: 'CLEAR_CURRENT', payload: true });
       } else {
         const res = await rawResponse.text();
-        console.log(res);
         Toast(res);
       }
     } catch (error) {
       dispatch({ type: 'CLEAR_CURRENT', payload: false });
-
       console.log(error);
       Toast();
     }
@@ -150,7 +143,6 @@ const AppState = props => {
         }
       });
       const res = await rawResponse.text();
-      console.log(res);
       getWorkers();
       Toast('Worker deleted');
     } catch (error) {
@@ -196,7 +188,6 @@ const AppState = props => {
         }
       });
       const res = await rawResponse.text();
-      console.log(res);
       getClients();
       Toast('All Clients Deleted');
     } catch (error) {
@@ -215,7 +206,6 @@ const AppState = props => {
         }
       });
       const res = await rawResponse.text();
-      console.log(res);
       getWorkers();
       Toast('All Workers Deleted');
     } catch (error) {

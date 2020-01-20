@@ -13,9 +13,7 @@ const AuthState = props => {
   };
   const [state, dispatch] = useReducer(AuthReducer, initialState);
   useEffect(() => {
-    console.log('ran');
     getUser();
-    console.log('finished');
     // eslint-disable-next-line
   }, []);
   useEffect(() => {
@@ -39,7 +37,6 @@ const AuthState = props => {
         Toast('Logged in successfully');
       } else {
         dispatch({ type: 'OUT' });
-        console.log(token);
         Toast(token);
       }
     } catch (error) {
@@ -71,7 +68,6 @@ const AuthState = props => {
         dispatch({ type: 'USER', payload: userData });
         // dispatch({ type: 'SETLOADING', payload: false });
       } else {
-        console.log('cant get clients', userData);
         Toast();
       }
     } catch (error) {

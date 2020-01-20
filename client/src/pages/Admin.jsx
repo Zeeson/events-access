@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import Search from '../components/Search';
 import Collection from '../components/Collection';
 import Add from '../components/Add';
-import NavBar from '../components/NavBar';
 import AuthContext from '../context/authContext/AuthContext';
 import AppContext from '../context/AppContext/AppContext';
 
@@ -20,7 +19,6 @@ const Admin = () => {
   } = useContext(AppContext);
 
   useEffect(() => {
-    console.log('mount admin');
     auth && getClients();
     // eslint-disable-next-line
   }, [auth]);
