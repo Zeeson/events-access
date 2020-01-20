@@ -5,7 +5,7 @@ import Admin from './pages/Admin';
 import Workers from './pages/Workers';
 import { Switch, Route } from 'react-router-dom';
 import ProtectedRoute from './auth/ProtectedRoute';
-import AuthState from './context/authContext/AuthState';
+import AuthState from './context/AuthContext/AuthState';
 import AppState from './context/AppContext/AppState';
 import Error from './pages/Error';
 import NavBar from './components/NavBar';

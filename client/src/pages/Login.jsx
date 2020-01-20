@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import AppContext from '../context/AppContext/AppContext';
-import AuthContext from '../context/authContext/AuthContext';
+import AuthContext from '../context/AuthContext/AuthContext';
 import Spinner from '../components/Spinner';
 import Toast from '../Util/Toast';
 
