@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import Search from '../components/Search';
 import Collection from '../components/Collection';
 import Add from '../components/Add';
-import AuthContext from '../context/AuthContext/AuthContext';
+import AuthContext from '../context/AuthContext/AppContext';
 import AppContext from '../context/AppContext/AppContext';
 import { Redirect } from 'react-router-dom';
 

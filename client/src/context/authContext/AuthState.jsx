@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
-import AuthContext from './AuthContext';
+import AuthContext from './AppContext';
 import AuthReducer from './AuthReducer';
 import Toast from '../../Util/Toast';
 
